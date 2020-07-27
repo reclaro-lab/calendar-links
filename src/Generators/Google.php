@@ -33,6 +33,29 @@ class Google implements Generator
             $url .= '&location='.urlencode($link->address);
         }
 
+        if ($link->recurPeriod) {
+            switch (strtolower($link->recurPeriod)) {
+                case "daily":
+                    $recur = "&recur=RRULE:FREQ=DAILY";
+                    break;
+                case "weekly":
+                    $recur = "&recur=RRULE:FREQ=WEEKLY";
+                    break;
+                case "weekdays":
+                    $recur = "&recur=RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR";
+                    break;
+                case "monthly":
+                    $recur = "&recur=RRULE:FREQ=MONTHLY";
+                    break;
+                default:
+                    $recur = null;
+                    break;
+            }
+            if ($recur && $link->recurUntil) {
+                $url .= '&recur='.urlencode($recur).';UNTIL='.$link->recurUntil;
+            }
+        }
+
         $url .= '&sprop=&sprop=name:';
 
         return $url;

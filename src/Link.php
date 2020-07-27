@@ -16,6 +16,8 @@ use Spatie\CalendarLinks\Generators\Yahoo;
  * @property-read string $description
  * @property-read string $address
  * @property-read bool $allDay
+ * @property-read string $recurPeriod
+ * @property-read DateTimeInterface $recurUntil
  */
 class Link
 {
@@ -40,7 +42,10 @@ class Link
     /** @var string */
     protected $recurPeriod;
 
-    public function __construct(string $title, DateTimeInterface $from, DateTimeInterface $to, bool $allDay = false)
+    /** @var string */
+    protected $recurUntil;
+
+    public function __construct(string $title, DateTimeInterface $from, DateTimeInterface $to, bool $allDay = false, string $recurPeriod = "never", string $recurUntil)
     {
         $this->title = $title;
         $this->allDay = $allDay;
@@ -51,6 +56,9 @@ class Link
 
         $this->from = clone $from;
         $this->to = clone $to;
+
+        $this->recurPeriod = $recurPeriod;
+        $this->recurUntil = $recurUntil;
     }
 
     /**
@@ -58,13 +66,15 @@ class Link
      * @param \DateTimeInterface $from
      * @param \DateTimeInterface $to
      * @param bool $allDay
+     * @param string $recurPeriod
+     * @param string $recurUntil
      *
      * @return static
      * @throws InvalidLink
      */
-    public static function create(string $title, DateTimeInterface $from, DateTimeInterface $to, bool $allDay = false)
+    public static function create(string $title, DateTimeInterface $from, DateTimeInterface $to, bool $allDay = false, string $recurPeriod = "never", string $recurUntil)
     {
-        return new static($title, $from, $to, $allDay);
+        return new static($title, $from, $to, $allDay, $recurPeriod, $recurUntil);
     }
 
     /**
