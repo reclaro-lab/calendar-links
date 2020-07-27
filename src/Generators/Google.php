@@ -52,7 +52,7 @@ class Google implements Generator
                     break;
             }
             if ($recur && $link->recurUntil) {
-                $url .= '&recur='.urlencode($recur).';UNTIL='.$link->recurUntil;
+                $url .= '&recur='.urlencode($recur).';UNTIL='.$link->recurUntil->format('Ymd');
             }
         }
 
