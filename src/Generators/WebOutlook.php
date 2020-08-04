@@ -22,8 +22,8 @@ class WebOutlook implements Generator
 
         $dateTimeFormat = $link->allDay ? $this->dateFormat : $this->dateTimeFormat;
 
-        $utcStartDateTime = (clone $link->from)->setTimezone(new DateTimeZone('UTC'));
-        $utcEndDateTime = (clone $link->to)->setTimezone(new DateTimeZone('UTC'));
+        $utcStartDateTime = (clone $link->from)->setTimezone(new DateTimeZone('Europe/London'));
+        $utcEndDateTime = (clone $link->to)->setTimezone(new DateTimeZone('Europe/London'));
 
         $url .= '&startdt='.$utcStartDateTime->format($dateTimeFormat);
         $url .= '&enddt='.$utcEndDateTime->format($dateTimeFormat);
