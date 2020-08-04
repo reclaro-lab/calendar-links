@@ -42,10 +42,10 @@ class Link
     /** @var string */
     protected $recurPeriod;
 
-    /** @var \DateTime */
+    /** @var string */
     protected $recurUntil;
 
-    public function __construct(string $title, DateTimeInterface $from, DateTimeInterface $to, bool $allDay = false, string $recurPeriod = "never", DateTimeInterface $recurUntil)
+    public function __construct(string $title, DateTimeInterface $from, DateTimeInterface $to, bool $allDay = false, string $recurPeriod = "never", string $recurUntil)
     {
         $this->title = $title;
         $this->allDay = $allDay;
@@ -72,7 +72,7 @@ class Link
      * @return static
      * @throws InvalidLink
      */
-    public static function create(string $title, DateTimeInterface $from, DateTimeInterface $to, bool $allDay = false, string $recurPeriod = "never", DateTimeInterface $recurUntil)
+    public static function create(string $title, DateTimeInterface $from, DateTimeInterface $to, bool $allDay = false, string $recurPeriod = "never", string $recurUntil)
     {
         return new static($title, $from, $to, $allDay, $recurPeriod, $recurUntil);
     }
