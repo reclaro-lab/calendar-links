@@ -3,6 +3,7 @@
 namespace Spatie\CalendarLinks\Generators;
 
 use Spatie\CalendarLinks\Generator;
+use Spatie\CalendarLinks\Helpers\FormatRecurring;
 use Spatie\CalendarLinks\Link;
 
 /**
