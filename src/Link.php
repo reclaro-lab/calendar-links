@@ -39,7 +39,13 @@ class Link
     /** @var string */
     protected $address;
 
-    public function __construct(string $title, DateTime $from, DateTime $to, bool $allDay = false)
+    /** @var string */
+    protected $recurPeriod;
+
+    /** @var \DateTime */
+    protected $recurUntil;
+
+    public function __construct(string $title, DateTime $from, DateTime $to, bool $allDay = false, string $recurPeriod = "never", DateTimeInterface $recurUntil)
     {
         $this->title = $title;
         $this->allDay = $allDay;
@@ -50,6 +56,9 @@ class Link
 
         $this->from = clone $from;
         $this->to = clone $to;
+
+        $this->recurPeriod = $recurPeriod;
+        $this->recurUntil = $recurUntil;
     }
 
     /**
@@ -57,13 +66,15 @@ class Link
      * @param \DateTime $from
      * @param \DateTime $to
      * @param bool $allDay
+     * @param string $recurPeriod
+     * @param \DateTime $recurUntil
      *
      * @return static
      * @throws InvalidLink
      */
-    public static function create(string $title, DateTime $from, DateTime $to, bool $allDay = false)
+    public static function create(string $title, DateTime $from, DateTime $to, bool $allDay = false, string $recurPeriod = "never", DateTime $recurUntil)
     {
-        return new static($title, $from, $to, $allDay);
+        return new static($title, $from, $to, $allDay, $recurPeriod, $recurUntil);
     }
 
     /**
