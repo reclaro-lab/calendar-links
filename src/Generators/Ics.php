@@ -35,6 +35,29 @@ class Ics implements Generator
             $url[] = 'DTEND;TZID='.$link->to->format($dateTimeFormat);
         }
 
+        if ($link->recurPeriod) {
+            switch (strtolower($link->recurPeriod)) {
+                case "daily":
+                    $recur = "RRULE:FREQ=DAILY";
+                    break;
+                case "weekly":
+                    $recur = "RRULE:FREQ=WEEKLY";
+                    break;
+                case "weekdays":
+                    $recur = "RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR";
+                    break;
+                case "monthly":
+                    $recur = "RRULE:FREQ=MONTHLY";
+                    break;
+                default:
+                    $recur = null;
+                    break;
+            }
+            if ($recur && $link->recurUntil) {
+                $url[] = $recur.';UNTIL='.$link->recurUntil->format('Ymd');
+            }
+        }
+
         if ($link->description) {
             $url[] = 'DESCRIPTION:'.$this->escapeString($link->description);
         }
