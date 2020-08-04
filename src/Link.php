@@ -37,9 +37,6 @@ class Link
     /** @var string */
     protected $address;
 
-    /** @var string */
-    protected $recurPeriod;
-
     public function __construct(string $title, DateTimeInterface $from, DateTimeInterface $to, bool $allDay = false)
     {
         $this->title = $title;
