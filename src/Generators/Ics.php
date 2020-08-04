@@ -36,23 +36,7 @@ class Ics implements Generator
         }
 
         if ($link->recurPeriod) {
-            switch (strtolower($link->recurPeriod)) {
-                case "daily":
-                    $recur = "RRULE:FREQ=DAILY";
-                    break;
-                case "weekly":
-                    $recur = "RRULE:FREQ=WEEKLY";
-                    break;
-                case "weekdays":
-                    $recur = "RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR";
-                    break;
-                case "monthly":
-                    $recur = "RRULE:FREQ=MONTHLY";
-                    break;
-                default:
-                    $recur = null;
-                    break;
-            }
+            $recur = FormatRecurring::formatRecurPeriod($link->recurPeriod);
             if ($recur && $link->recurUntil) {
                 $url[] = $recur.';UNTIL='.$link->recurUntil->format('Ymd');
             }

@@ -11,16 +11,16 @@ class FormatRecurring
         if ($recur_period) {
             switch (strtolower($recur_period)) {
                 case "daily":
-                    $recur = "RRULE:FREQ=DAILY";
+                    $recur = "DAILY";
                     break;
                 case "weekly":
-                    $recur = "RRULE:FREQ=WEEKLY";
+                    $recur = "WEEKLY";
                     break;
                 case "weekdays":
-                    $recur = "RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR";
+                    $recur = "WEEKLY;BYDAY=MO,TU,WE,TH,FR";
                     break;
                 case "monthly":
-                    $recur = "RRULE:FREQ=MONTHLY";
+                    $recur = "MONTHLY";
                     break;
                 default:
                     $recur = null;
