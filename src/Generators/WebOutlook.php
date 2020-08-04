@@ -22,11 +22,14 @@ class WebOutlook implements Generator
 
         $dateTimeFormat = $link->allDay ? $this->dateFormat : $this->dateTimeFormat;
 
-        $utcStartDateTime = (clone $link->from)->setTimezone(new DateTimeZone('Europe/London'));
-        $utcEndDateTime = (clone $link->to)->setTimezone(new DateTimeZone('Europe/London'));
+        $startTimeZone = $link->from->getTimezone();
+        $endTimeZone = $link->to->getTimezone();
 
-        $url .= '&startdt='.$utcStartDateTime->format($dateTimeFormat);
-        $url .= '&enddt='.$utcEndDateTime->format($dateTimeFormat);
+        $startDateTime = (clone $link->from)->setTimezone($startTimeZone);
+        $endDateTime = (clone $link->to)->setTimezone($endTimeZone);
+
+        $url .= '&startdt='.$startDateTime->format($dateTimeFormat);
+        $url .= '&enddt='.$endDateTime->format($dateTimeFormat);
 
         if ($link->allDay) {
             $url .= '&allday=true';
