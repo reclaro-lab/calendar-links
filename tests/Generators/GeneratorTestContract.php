@@ -34,15 +34,15 @@ trait GeneratorTestContract
     }
 
     /** @test */
-    public function it_can_generate_a_single_day_allday_event_link()
+    public function it_can_generate_an_all_day_event_link()
     {
         $this->assertMatchesSnapshot(
-            $this->generator()->generate($this->createSingleDayAllDayEventLink())
+            $this->generator()->generate($this->createAllDayEventLink())
         );
 
         $this->assertSame(
-            $this->generator()->generate($this->createSingleDayAllDayEventLink(false)),
-            $this->generator()->generate($this->createSingleDayAllDayEventLink(true))
+            $this->generator()->generate($this->createAllDayEventLink(false)),
+            $this->generator()->generate($this->createAllDayEventLink(true))
         );
     }
 
@@ -56,19 +56,6 @@ trait GeneratorTestContract
         $this->assertSame(
             $this->generator()->generate($this->createMultipleDaysEventLink(false)),
             $this->generator()->generate($this->createMultipleDaysEventLink(true))
-        );
-    }
-
-    /** @test */
-    public function it_can_generate_a_multiple_days_event_link_with_allday_flag()
-    {
-        $this->assertMatchesSnapshot(
-            $this->generator()->generate($this->createMultipleDaysAllDayEventLink())
-        );
-
-        $this->assertSame(
-            $this->generator()->generate($this->createMultipleDaysAllDayEventLink(false)),
-            $this->generator()->generate($this->createMultipleDaysAllDayEventLink(true))
         );
     }
 }
