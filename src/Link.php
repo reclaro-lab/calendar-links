@@ -16,6 +16,8 @@ use Spatie\CalendarLinks\Generators\Yahoo;
  * @property-read string $description
  * @property-read string $address
  * @property-read bool $allDay
+ * @property-read string $recurPeriod
+ * @property-read \DateTime $recurUntil
  */
 class Link
 {
