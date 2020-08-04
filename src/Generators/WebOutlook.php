@@ -13,7 +13,7 @@ class WebOutlook implements Generator
 {
     /** @var string {@see https://www.php.net/manual/en/function.date.php} */
     protected $dateFormat = 'Y-m-d';
-    protected $dateTimeFormat = 'Y-m-d\TH:i:s\Z';
+    protected $dateTimeFormat = 'Y-m-d\TH:i:s';
 
     /** {@inheritdoc} */
     public function generate(Link $link): string
