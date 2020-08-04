@@ -36,23 +36,23 @@ class Google implements Generator
         if ($link->recurPeriod) {
             switch (strtolower($link->recurPeriod)) {
                 case "daily":
-                    $recur = "&recur=RRULE:FREQ=DAILY";
+                    $recur = "DAILY";
                     break;
                 case "weekly":
-                    $recur = "&recur=RRULE:FREQ=WEEKLY";
+                    $recur = "WEEKLY";
                     break;
                 case "weekdays":
-                    $recur = "&recur=RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR";
+                    $recur = "WEEKLY;BYDAY=MO,TU,WE,TH,FR";
                     break;
                 case "monthly":
-                    $recur = "&recur=RRULE:FREQ=MONTHLY";
+                    $recur = "MONTHLY";
                     break;
                 default:
                     $recur = null;
                     break;
             }
             if ($recur && $link->recurUntil) {
-                $url .= '&recur='.urlencode($recur).';UNTIL='.$link->recurUntil->format('Ymd');
+                $url .= '&recur=RRULE:FREQ='.$recur.';UNTIL='.$link->recurUntil->format('Ymd');
             }
         }
 
