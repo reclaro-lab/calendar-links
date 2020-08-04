@@ -45,7 +45,7 @@ class Link
     /** @var \DateTime */
     protected $recurUntil;
 
-    public function __construct(string $title, DateTime $from, DateTime $to, bool $allDay = false, string $recurPeriod = "never", DateTimeInterface $recurUntil)
+    public function __construct(string $title, DateTime $from, DateTime $to, bool $allDay = false, string $recurPeriod = "never", DateTime $recurUntil)
     {
         $this->title = $title;
         $this->allDay = $allDay;
