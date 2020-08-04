@@ -3,6 +3,7 @@
 namespace Spatie\CalendarLinks\Generators;
 
 use Spatie\CalendarLinks\Generator;
+use Spatie\CalendarLinks\Helpers\FormatRecurring;
 use Spatie\CalendarLinks\Link;
 
 /**
@@ -34,23 +35,7 @@ class Google implements Generator
         }
 
         if ($link->recurPeriod) {
-            switch (strtolower($link->recurPeriod)) {
-                case "daily":
-                    $recur = "DAILY";
-                    break;
-                case "weekly":
-                    $recur = "WEEKLY";
-                    break;
-                case "weekdays":
-                    $recur = "WEEKLY;BYDAY=MO,TU,WE,TH,FR";
-                    break;
-                case "monthly":
-                    $recur = "MONTHLY";
-                    break;
-                default:
-                    $recur = null;
-                    break;
-            }
+            $recur = FormatRecurring::formatRecurPeriod($link->recurPeriod);
             if ($recur && $link->recurUntil) {
                 $url .= '&recur=RRULE:FREQ='.$recur.';UNTIL='.$link->recurUntil->format('Ymd');
             }
