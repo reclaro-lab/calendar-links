@@ -20,7 +20,8 @@ This will output: `https://calendar.google.com/calendar/render?action=TEMPLATE&t
 If you follow that link (and are authenticated with Google) you'll see a screen to add the event to your calendar.
 
 The package can also generate ics files that you can open in several email and calendar programs, including Microsoft Outlook, Google Calendar, and Apple Calendar.
-**Recurring events do not work on Microsodt Outlook and have not been set up for Yahoo**
+
+**Recurring events do not work on Microsoft Outlook and have not been set up for Yahoo**.
 
 
 ## Usage
