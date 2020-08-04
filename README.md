@@ -1,10 +1,6 @@
-# Generate add to calendar links for Google, iCal and other calendar systems
+# Generate add to calendar links for Google, iCal and other calendar systems with recurring events
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/calendar-links.svg?style=flat-square)](https://packagist.org/packages/spatie/calendar-links)
-[![Build Status](https://img.shields.io/travis/spatie/calendar-links/master.svg?style=flat-square)](https://travis-ci.org/spatie/calendar-links)
-[![Quality Score](https://img.shields.io/scrutinizer/g/spatie/calendar-links.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/calendar-links)
-[![StyleCI](https://styleci.io/repos/103638080/shield?branch=master)](https://styleci.io/repos/103638080)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/calendar-links.svg?style=flat-square)](https://packagist.org/packages/spatie/calendar-links)
+[Forked from spatie/calendar-links](https://github.com/spatie/calendar-links)
 
 Using this package you can generate links to add events to calendar systems. Here's a quick example:
 
@@ -12,23 +8,20 @@ Using this package you can generate links to add events to calendar systems. Her
 Link::create(
     'Birthday',
     DateTime::createFromFormat('Y-m-d H:i', '2018-02-01 09:00'),
-    DateTime::createFromFormat('Y-m-d H:i', '2018-02-01 18:00'))
+    DateTime::createFromFormat('Y-m-d H:i', '2018-02-01 18:00')),
+    false,
+    'daily',
+    DateTime::createFromFormat('Y-m-d', '2018-03-01')
 )->google();
 ```
 
-This will output: `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Birthday&dates=20180201T090000/20180201T180000&sprop=&sprop=name:`
+This will output: `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Birthday&dates=20180201T090000/20180201T180000&recur=RRULE:FREQ=DAILY;UNTIL=20180301sprop=&sprop=name:`
 
 If you follow that link (and are authenticated with Google) you'll see a screen to add the event to your calendar.
 
 The package can also generate ics files that you can open in several email and calendar programs, including Microsoft Outlook, Google Calendar, and Apple Calendar.
+**Recurring events do not work on Microsodt Outlook and have not been set up for Yahoo**
 
-## Installation
-
-You can install the package via composer:
-
-```bash
-composer require spatie/calendar-links
-```
 
 ## Usage
 
@@ -38,8 +31,9 @@ use Spatie\CalendarLinks\Link;
 
 $from = DateTime::createFromFormat('Y-m-d H:i', '2018-02-01 09:00');
 $to = DateTime::createFromFormat('Y-m-d H:i', '2018-02-01 18:00');
+$until = DateTime::createFromFormat('Y-m-d', '2018-03-01');
 
-$link = Link::create('Sebastian\'s birthday', $from, $to)
+$link = Link::create('Sebastian\'s birthday', $from, $to, false, 'daily', $until)
     ->description('Cookies & cocktails!')
     ->address('Samberstraat 69D, 2060 Antwerpen');
 

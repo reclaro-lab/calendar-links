@@ -2,6 +2,9 @@
 
 All notable changes to `calendar-links` will be documented in this file
 
+## 1.3.1 - 2020-08-04
+- Support for recurring events in Google Calendar and Ics
+
 ## 1.3.0 - 2020-04-29
 - Support custom generators (`$link->formatWith(new Your\Generator()`)
 - Fix iCal links that contains special chars (use base64 for encoding)
