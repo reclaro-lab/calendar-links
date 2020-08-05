@@ -54,7 +54,7 @@ class Ics implements Generator
         $url[] = 'END:VCALENDAR';
         $redirectLink = implode("\r\n", $url);
 
-        return 'data:text/calendar;charset=utf8;base64,'.base64_encode($redirectLink);
+        return $redirectLink;
     }
 
     /** @see https://tools.ietf.org/html/rfc5545.html#section-3.3.11 */
