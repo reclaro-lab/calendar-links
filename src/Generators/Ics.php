@@ -13,15 +13,33 @@ class Ics implements Generator
 {
     /** @var string {@see https://www.php.net/manual/en/function.date.php} */
     protected $dateFormat = 'Ymd';
-    protected $dateTimeFormat = 'e:Ymd\THis';
+    protected $dateTimeFormat = 'Ymd\THis\Z';
 
     /** {@inheritdoc} */
     public function generate(Link $link): string
     {
         $url = [
             'BEGIN:VCALENDAR',
+            'PRODID:-//Google Inc//Google Calendar 70.9054//EN',
             'VERSION:2.0',
             'METHOD:PUBLISH',
+            'BEGIN:VTIMEZONE',
+            'TZID:Europe/London',
+            'BEGIN:DAYLIGHT',
+            'TZOFFSETFROM:+0000',
+            'TZOFFSETTO:+0100',
+            'TZNAME:BST',
+            'DTSTART:19700329T010000',
+            'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU',
+            'END:DAYLIGHT',
+            'BEGIN:STANDARD',
+            'TZOFFSETFROM:+0100',
+            'TZOFFSETTO:+0000',
+            'TZNAME:GMT',
+            'DTSTART:19701025T020000',
+            'RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU',
+            'END:STANDARD',
+            'END:VTIMEZONE',
             'BEGIN:VEVENT',
             'UID:'.$this->generateEventUid($link),
             'SUMMARY:'.$this->escapeString($link->title),
@@ -33,8 +51,9 @@ class Ics implements Generator
             $url[] = 'DTSTART:'.$link->from->format($dateTimeFormat);
             $url[] = 'DURATION:P1D';
         } else {
-            $url[] = 'DTSTART;TZID='.$link->from->format($dateTimeFormat);
-            $url[] = 'DTEND;TZID='.$link->to->format($dateTimeFormat);
+            $url[] = 'DTSTART:'.$link->from->format($dateTimeFormat);
+            $url[] = 'DTEND:'.$link->to->format($dateTimeFormat);
+            $url[] = 'DTSTAMP:'.(new \DateTime())->format('Ymd\THis\Z');
         }
 
         if ($link->recurPeriod) {
