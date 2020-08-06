@@ -51,8 +51,8 @@ class Ics implements Generator
             $url[] = 'DTSTART:'.$link->from->format($dateTimeFormat);
             $url[] = 'DURATION:P1D';
         } else {
-            $url[] = 'DTSTART:'.$link->from->format($dateTimeFormat);
-            $url[] = 'DTEND:'.$link->to->format($dateTimeFormat);
+            $url[] = 'DTSTART:'.$link->from->setTimezone('UTC')->format($dateTimeFormat);
+            $url[] = 'DTEND:'.$link->to->setTimezone('UTC')->format($dateTimeFormat);
             $url[] = 'DTSTAMP:'.(new \DateTime())->format('Ymd\THis\Z');
         }
 
