@@ -59,7 +59,7 @@ class Ics implements Generator
         if ($link->recurPeriod) {
             $recur = FormatRecurring::formatRecurPeriod($link->recurPeriod);
             if ($recur && $link->recurUntil) {
-                $url[] = $recur.';UNTIL='.$link->recurUntil->format('Ymd');
+                $url[] = 'RRULE:FREQ='.$recur.';UNTIL='.$link->recurUntil->format('Ymd');
             }
         }
 
